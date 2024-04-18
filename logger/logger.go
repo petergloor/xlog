@@ -6,9 +6,11 @@ import (
 )
 
 const (
-	Out = 0
-	In = 1
+	Out Direction = iota
+	In
 )
+
+type Direction int
 
 type Logger struct {
 	file *os.File
