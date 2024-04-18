@@ -6,8 +6,8 @@ import (
 )
 
 const (
-	out = 0
-	in = 1
+	Out = 0
+	In = 1
 )
 
 type Logger struct {
@@ -28,7 +28,7 @@ func (l *Logger) Log(direction int, data []byte) error {
 	var err error
 	// create an output buffer with a header 
 	output := []byte("[!]<")
-	if direction == out {
+	if direction == Out {
 		output =  []byte("[!]>")
 	}
 
