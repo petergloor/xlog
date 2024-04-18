@@ -5,6 +5,11 @@ import (
 	"os"
 )
 
+const (
+	out = 0
+	in = 1
+)
+
 type Logger struct {
 	file *os.File
 }
@@ -19,9 +24,18 @@ func (l *Logger) Open(filename string) error {
 	return nil
 }
 
-func (l *Logger) Log(msg string, data []byte) error {
+func (l *Logger) Log(direction int, data []byte) error {
 	var err error
-	_, err = l.file.Write(data)
+	// create an output buffer with a header 
+	output := []byte("[!]<")
+	if direction == out {
+		output =  []byte("[!]>")
+	}
+
+	// Append the data to the header and write it to the file
+	output = append(output, data...)
+	
+	_, err = l.file.Write(output)
 	if err != nil {
 		return err
 	}
